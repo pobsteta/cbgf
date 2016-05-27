@@ -10,8 +10,6 @@ services:
         container_name: pgdata        
         volumes:
           - datavol:/var/lib/postgresql/data
-          - datavol:/var/lib/tryton
-          - datavol:/var/log/tryton 
         
     db:        
         image: pobsteta/gf-db

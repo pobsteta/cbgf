@@ -63,9 +63,6 @@ RUN mv -v /usr/share/postgresql/$PG_MAJOR/postgresql.conf.sample /usr/share/post
 
 RUN mkdir -p /var/run/postgresql && chown -R postgres /var/run/postgresql
 
-# On supprime wget
-RUN apt-get purge -y --auto-remove wget
-
 ENV PATH /usr/lib/postgresql/$PG_MAJOR/bin:$PATH
 ENV PGDATA /var/lib/postgresql/data
 VOLUME ["/var/lib/postgresql/data"]
@@ -79,12 +76,14 @@ RUN chmod 700 /docker-entrypoint-initdb.d/init-postgis-db.sh
 
 # === On ajoute ici le fichier de sauvegarde de la bdd BEF de démo ===
 
-RUN mkdir -p /data/restore
-RUN cd /data/restore
-# On le télécharge sur le serveur ftp
-RUN wget ftp://139.59.135.185/gf/tryton.sql.gz
+RUN mkdir -p /data/restore \
+	&& cd /data/restore \
+	&& wget -c ftp://139.59.135.185/gf/tryton.sql.gz
 
 # ====================================================================
+
+# On supprime wget
+RUN apt-get purge -y --auto-remove wget
 
 COPY init-pg.sh /
 RUN chmod 700 /init-pg.sh

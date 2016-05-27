@@ -40,7 +40,8 @@ if [ "${INIT}" == "0" ]; then
         shopt -s nullglob
         for f in /data/restore/*.sql.gz
         do
-	        echo "Fichier backup trouvé : $f"
+        	echo
+	        echo "Fichier RESTAURATION trouvé : $f"
             DBNAME=$(basename -s ".sql.gz" "$f")
             echo
             echo "Restauration de la base de données $DBNAME..."
