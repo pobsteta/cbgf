@@ -36,9 +36,13 @@ Ajouter l'utilisateur docker (i.e. vous-mêmes) au groupe docker :
 
 Note: vous devez vous reconnecter à votre système pour prise en compte des changements.
 
-Ajouter docker-compose sur un système ubuntu avec la commande
+Ajouter pip sur un système ubuntu avec la commande
 
-    sudo apt-get install docker-compose
+    sudo apt-get install python-pip
+    
+Puis installer docker-compose avec la commande
+
+    sudo pip install docker-compose
 
 ## Usage
 
