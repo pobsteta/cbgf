@@ -74,16 +74,12 @@ RUN mkdir /docker-entrypoint-initdb.d
 COPY ./init-postgis-db.sh /docker-entrypoint-initdb.d/init-postgis-db.sh
 RUN chmod 700 /docker-entrypoint-initdb.d/init-postgis-db.sh
 
-# === On ajoute ici le fichier de sauvegarde de la bdd BEF de démo ===
+# Copie le script de création des bases de données de sauvegarde tryton
+COPY ./init-tryton-sql.sh /docker-entrypoint-initdb.d/init-tryton-sql.sh
+RUN chmod 700 /docker-entrypoint-initdb.d/init-tryton-sql.sh
 
-ENV REP gf
-
-#RUN mkdir -p /data/restore && cd /data/restore && wget -c ftp://139.59.135.185/$REP/tryton.sql.gz
-
-# ====================================================================
-
-# On supprime wget
-RUN apt-get purge -y --auto-remove wget
+# Création du répertoire de sauvegarde des fichiers SQL
+RUN mkdir -p /data/restore
 
 COPY init-pg.sh /
 RUN chmod 700 /init-pg.sh
