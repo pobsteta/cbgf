@@ -18,7 +18,7 @@ Lister les conteneurs :
   
 Se connecter sur le conteneur sime :
 
-  docker exec -ti <id_conteneur_bef> bash
+  docker exec -ti <id_conteneur_sime> bash
   
 Ou directement avec le nom du conteneur conteu dans docker-compose.yml :
 

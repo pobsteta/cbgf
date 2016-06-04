@@ -76,7 +76,7 @@ Lister les conteneurs :
   
 Se connecter sur le conteneur sime :
 
-  docker exec -ti <id_conteneur_gf> bash
+  docker exec -ti <id_conteneur_sime> bash
   
 Ou directement avec le nom du conteneur conteu dans docker-compose.yml :
 
@@ -93,4 +93,4 @@ Lancer un client tryton avec les attributs :
   identifiant: admin
   mot de passe: admin
   
-Voilà vous pouvez utiliser SIME BEF !
+Voilà vous pouvez utiliser SIME GF !
