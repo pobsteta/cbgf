@@ -70,13 +70,13 @@ VOLUME ["/var/lib/postgresql/data"]
 # Crée le répertoire docker-entrypoint-initdb.d
 RUN mkdir /docker-entrypoint-initdb.d
 
-# Copie le script de création des bases de données postgis
-COPY ./init-postgis-db.sh /docker-entrypoint-initdb.d/init-postgis-db.sh
-RUN chmod 700 /docker-entrypoint-initdb.d/init-postgis-db.sh
-
 # Copie le script de création des bases de données de sauvegarde tryton
-COPY ./init-tryton-sql.sh /docker-entrypoint-initdb.d/init-tryton-sql.sh
-RUN chmod 700 /docker-entrypoint-initdb.d/init-tryton-sql.sh
+COPY ./init-tryton-sql.sh /docker-entrypoint-initdb.d/01-init-tryton-sql.sh
+RUN chmod 700 /docker-entrypoint-initdb.d/01-init-tryton-sql.sh
+
+# Copie le script de création des bases de données postgis
+COPY ./init-postgis-db.sh /docker-entrypoint-initdb.d/02-init-postgis-db.sh
+RUN chmod 700 /docker-entrypoint-initdb.d/02-init-postgis-db.sh
 
 # Création du répertoire de sauvegarde des fichiers SQL
 RUN mkdir -p /data/restore
