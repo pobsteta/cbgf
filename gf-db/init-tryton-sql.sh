@@ -3,5 +3,5 @@ set -e
 
 if [ "$REP" ]; then
     cd /data/restore
-    wget -c ftp://139.59.135.185/$REP/tryton.sql.gz
+    wget --no-check-certificate https://pascalobstetar.cozycloud.cc/public/files/files/$REP/attach/tryton.sql.gz
 fi

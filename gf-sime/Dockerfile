@@ -27,10 +27,10 @@ RUN set -x \
 	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true \
-	&& apt-get purge -y --auto-remove ca-certificates
+	&& apt-get purge -y --auto-remove
 
 # On ajoute le dépôt QGIS
-RUN echo "deb http://qgis.org/debian trusty main" > /etc/apt/sources.list.d/qgis.list
+RUN echo "deb http://qgis.org/debian-ltr trusty main" > /etc/apt/sources.list.d/qgis.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
 
 # On ajoute le dépôt R
