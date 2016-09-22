@@ -31,7 +31,7 @@ RUN set -x \
 
 # On ajoute le dépôt QGIS
 RUN echo "deb http://qgis.org/debian-ltr trusty main" > /etc/apt/sources.list.d/qgis.list
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 3FF5FFCAD71472C4
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 073D307A618E5811
 
 # On ajoute le dépôt R
 RUN echo "deb http://cran.uni-muenster.de/bin/linux/ubuntu trusty/" > /etc/apt/sources.list.d/rcran.list
