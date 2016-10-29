@@ -1,8 +1,8 @@
 # PostgreSQL stack
 #
 # This image includes the following tools
-# - PostgreSQL 9.5
-# - Postgis 2.2
+# - PostgreSQL 9.6
+# - Postgis 2.3
 # - SIME 2.8
 #
 # Version 1.0
@@ -39,12 +39,12 @@ RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* 
 ENV LANG fr_FR.utf8
 
 # Les versions de PostgreSQL/Postgis à installer
-ENV PG_MAJOR 9.5
-ENV POSTGIS_MAJOR 2.2
+ENV PG_MAJOR 9.6
+ENV POSTGIS_MAJOR 2.3
 
 # on ajoute le dépôt Postgres
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main $PG_MAJOR" > /etc/apt/sources.list.d/pgdg.list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main $PG_MAJOR" > /etc/apt/sources.list.d/pgdg.list
 
 RUN apt-get update \
 	&& apt-get install -y postgresql-common \

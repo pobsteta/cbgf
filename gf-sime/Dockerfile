@@ -30,11 +30,11 @@ RUN set -x \
 	&& apt-get purge -y --auto-remove
 
 # On ajoute le dépôt QGIS
-RUN echo "deb http://qgis.org/debian-ltr trusty main" > /etc/apt/sources.list.d/qgis.list
+RUN echo "deb http://qgis.org/debian-ltr xenial main" > /etc/apt/sources.list.d/qgis.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-key 073D307A618E5811
 
 # On ajoute le dépôt R
-RUN echo "deb http://cran.uni-muenster.de/bin/linux/ubuntu trusty/" > /etc/apt/sources.list.d/rcran.list
+RUN echo "deb http://cran.uni-muenster.de/bin/linux/ubuntu xenial/" > /etc/apt/sources.list.d/rcran.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
 # On met à jour
@@ -42,11 +42,12 @@ RUN apt-get -y update
 
 # On installe les dépendances de PostgreSQL, Tryton, R et QGIS
 # Pour QGIS, R, Tryton
-RUN apt-get install -y python-dev python-pip python-lxml python-relatorio python-genshi python-dateutil python-polib python-sql python-psycopg2 python-webdav python-pydot unoconv python-sphinx python-simplejson python-yaml git libgdal1h python-software-properties software-properties-common libpq-dev python-ldap python-gdal python-rpy2 libgeos-dev python-vobject python-vatnumber apache2 qgis qgis-server libapache2-mod-fcgid
+RUN apt-get install -y python-dev python-pip python-lxml python-relatorio python-genshi python-dateutil python-polib python-sql python-psycopg2 python-webdav python-pydot unoconv python-sphinx python-simplejson python-yaml git libgdal1i python-software-properties software-properties-common libpq-dev python-ldap python-gdal python-rpy2 libgeos-dev python-vobject python-vatnumber apache2 qgis qgis-server libapache2-mod-fcgid
 
 ## On ajoute l'utilisateur par défaut tryton pour l'installation des librairies R
 # On ajoute l'utilisateur tryton au système
 RUN useradd --system tryton
+RUN pip install --upgrade pip
 
 # On ajoute le groupe www-data à root pour QGIS-server
 RUN addgroup www-data root
@@ -60,7 +61,7 @@ ADD fcgid.conf /etc/apache2/mods-available/fcgid.conf
 ADD fqdn.conf /etc/apache2/conf-available/fqdn.conf
 
 # Active fqdn.conf pour éviter le message d'erreur au lancement du serveur apache en localhost
-RUN sudo a2enconf fqdn
+RUN a2enconf fqdn
 
 # On ajoute les librairies "sp" et "rgeos" nécessaire à QGIS, R et Tryton
 RUN echo 'install.packages(c("sp", "rgeos"), repos="http://cran.us.r-project.org", dependencies=TRUE)' > /tmp/packages.R \
@@ -95,8 +96,17 @@ EXPOSE 8000
 # Expose le port 8001 pour QGIS server et http
 EXPOSE 8001
 
+# Variables d'environnement apache
+env APACHE_RUN_USER    www-data
+env APACHE_RUN_GROUP   www-data
+env APACHE_PID_FILE    /var/run/apache2.pid
+env APACHE_RUN_DIR     /var/run/apache2
+env APACHE_LOCK_DIR    /var/lock/apache2
+env APACHE_LOG_DIR     /var/log/apache2
+env LANG               C
+
 # On lance apache en tâche de fond
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["apache2", "-D", "FOREGROUND"]
 
 # ---------- FIN --------------
 #
