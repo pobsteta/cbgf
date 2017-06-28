@@ -10,8 +10,8 @@ services:
         container_name: pgdata
         volumes:
           - datavol:/var/lib/postgresql/data
-        
-    db:        
+
+    db:
         image: pobsteta/gf-db
         container_name: db
         volumes_from:
@@ -21,7 +21,7 @@ services:
         environment:
         - POSTGRES_USER=docker
         - POSTGRES_PASSWORD=docker
-        - REP=4e4aab02f976c28a1cf3bd31191b5847
+        #- REP=4e4aab02f976c28a1cf3bd31191b5847
         restart: always
 
     sime:
