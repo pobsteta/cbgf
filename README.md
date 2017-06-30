@@ -1,14 +1,14 @@
 # Docker Setup for SIME GF (Gestion Forestière)
 
 Ce dépôt Docker est un moyen rapide et efficace d'installer
-un serveur de démonstration de [SIME GF] (http://www.bioecoforests.com/index.html)
+un serveur de démonstration de [SIME CBGF] (http://www.bioecoforests.com/index.html)
 (Système Intégré de Management Environnemental Bio Eco Forests).
 
 Ce build est basé sur les images officielles :
 
 * [Docker base image](https://hub.docker.com/r/pobsteta/docker-base/)
-* [Docker gf-db](https://hub.docker.com/r/pobsteta/gf-db/)
-* [Docker gf-sime](https://hub.docker.com/r/pobsteta/gf-sime/)
+* [Docker cbgf-db](https://hub.docker.com/r/pobsteta/cbgf-db/)
+* [Docker cbgf-sime](https://hub.docker.com/r/pobsteta/cbgf-sime/)
 
 et utilise
 
@@ -17,7 +17,7 @@ et utilise
 pour la définition du lancement des application et mise en place de
 l'environnement de production.
 
-L'image est automatiquement construite depuis [GitHub](https://github.com/pobsteta/bef.git).
+L'image est automatiquement construite depuis [GitHub](https://github.com/pobsteta/cbbf.git).
 
 ## Installation
 
@@ -48,12 +48,12 @@ Puis installer docker-compose avec la commande
 
 Créer un répertoire de travail
 
-    mkdir ~/gf
-    cd gf
+    mkdir ~/cbgf
+    cd cbgf
 
 Télécharger le ficher docker-compose.yml
 
-    curl -o ./docker-compose.yml https://raw.githubusercontent.com/pobsteta/gf/master/docker-compose.yml
+    curl -o ./docker-compose.yml https://raw.githubusercontent.com/pobsteta/cbgf/master/docker-compose.yml
 
 Exécuter
 
@@ -64,7 +64,7 @@ et allez prendre une tasse de café pour patienter...
 La première instanciation prend quelques temps pour
 
 * charger les images
-* importer la base de données de GF (Gestion Forestière)
+* importer la base de données de CBGF (Gestion Forestière)
 
 Les instanciations suivantes par la commande `docker-compose up` iront beaucoup plus vite.
 Arrêter le serveur avec la commande Ctrl+C.
@@ -93,4 +93,4 @@ Lancer un client tryton avec les attributs :
   identifiant: admin
   mot de passe: admin
   
-Voilà vous pouvez utiliser SIME GF !
+Voilà vous pouvez utiliser SIME CBGF !
